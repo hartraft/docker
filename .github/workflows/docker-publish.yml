@@ -5,6 +5,7 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - master
+      - aarch64
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -46,6 +47,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
 
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME

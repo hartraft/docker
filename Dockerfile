@@ -40,15 +40,15 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-configure ldap --with-libdir=lib/$(uname -m)-linux-gnu \
+    && docker-php-ext-configure ldap --with-libdir=lib/aarch64-linux-gnu \
     && docker-php-ext-install -j$(nproc) pdo_mysql exif zip gd opcache ldap \
     # Install ionCube
     && echo [Install ionCube] \
-    && curl -O https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_$(uname -m).zip \
+    && curl -O https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_aarch64.zip \
     && PHP_EXT_DIR=$(php-config --extension-dir) \
-    && unzip -j ioncube_loaders_lin_$(uname -m).zip ioncube/ioncube_loader_lin_7.3.so -d $PHP_EXT_DIR \
+    && unzip -j ioncube_loaders_lin_aarch64.zip ioncube/ioncube_loader_lin_7.3.so -d $PHP_EXT_DIR \
     && echo "zend_extension=ioncube_loader_lin_7.3.so" >> /usr/local/etc/php/conf.d/00_ioncube_loader_lin_7.3.ini \
-    && rm -rf ioncube_loaders_lin_$(uname -m).zip \
+    && rm -rf ioncube_loaders_lin_aarch64.zip \
     # Enable Apache XSendfile
     && echo [Enable Apache XSendfile] \
     && echo "XSendFile On\nXSendFilePath /user-files" | tee "/etc/apache2/conf-available/filerun.conf" \
