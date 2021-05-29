@@ -1,4 +1,4 @@
-FROM php:7.3.24-apache
+FROM php:7.3.27-apache
 
 ENV FR_DB_HOST=db \
     FR_DB_PORT=3306 \
